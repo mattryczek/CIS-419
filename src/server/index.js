@@ -1,37 +1,43 @@
 import express from 'express';
+import path from 'path';
+import compress from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import compress from 'compression';
+import services from './services';
+
+const root = path.join(__dirname, '../../');
 
 const app = express();
-
 app.use(compress());
-app.use(helmet());
+if(process.env.NODE_ENV === 'production') {
+  app.use(helmet());
+  app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "*.amazonaws.com"]
+    }
+  }));
+  app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+}
 app.use(cors());
+app.use('/', express.static(path.join(root, 'dist/client')));
+app.use('/uploads', express.static(path.join(root, 'uploads')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(root, '/dist/client/index.html'));
+});
+const serviceNames = Object.keys(services);
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'"],
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'", "data:", "*.amazonaws.com"]
+for (let i = 0; i < serviceNames.length; i += 1) {
+  const name = serviceNames[i];
+  if (name === 'graphql') {
+    (async () => {
+      await services[name].start();
+      services[name].applyMiddleware({ app });
+    })();
+  } else {
+    app.use(`/${name}`, services[name]);
   }
-}));
-
-app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
-
-var randPage = 0;
-
-app.get('/', function (req, res, next) {
-    randPage = Math.floor(Math.random() * (10 - 1) + 1)
-    console.log('Generated: ' + randPage);
-    next();
-  }, function (req, res) {
-    res.send('Welcome to page ' + randPage + '!');
-  });
-
-  app.get('/quine', function (req, res) {
-    res.send('app.get(\'/quine\', function (req, res) {     res.send(\'\');   });');
-  });
-
+}
 app.listen(8000, () => console.log('Listening on port 8000!'));
