@@ -4,6 +4,7 @@ import compress from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
 import services from './services';
+import db from './database';
 
 const root = path.join(__dirname, '../../');
 
