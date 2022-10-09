@@ -29,7 +29,7 @@ export default function resolver() {
             ]).then(() => {
               logger.log({
                 level: 'info',
-                message: 'Posted' + newPost,
+                message: 'Posted text [' + newPost.text + ']',
               });
               return newPost;
             });
