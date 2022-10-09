@@ -1,10 +1,16 @@
 import express from 'express';
 import path from 'path';
-import compress from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import services from './services';
+import compress from 'compression';
+import servicesLoader from './services';
 import db from './database';
+
+const utils = {
+  db,
+};
+
+const services = servicesLoader(utils);
 
 const root = path.join(__dirname, '../../');
 
