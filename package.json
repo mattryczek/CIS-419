@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@graphql-tools/schema": "^9.0.4",
     "apollo-server-express": "^3.10.2",
     "compression": "^1.7.4",
