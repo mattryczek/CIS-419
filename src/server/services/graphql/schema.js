@@ -6,6 +6,10 @@ const typeDefinitions = `
   }
   type RootQuery {
     posts: [Post]
+    postsFeed(page: Int, limit: Int): PostFeed
+  }
+  type PostFeed {
+    posts: [Post]
   }
   type User {
     avatar: String
