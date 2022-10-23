@@ -34,7 +34,7 @@ const Feed = () => {
     const [postContent, setPostContent] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
-    const { loading, error, data, fetchMore } = useQuery(GET_POSTS, { pollInterval: 5000, variables: { page: 0, limit: 6 } });
+    const { loading, error, data, fetchMore } = useQuery(GET_POSTS, { pollInterval: 5000, variables: { page: 0, limit: 10} });
 
     const [addPost] = useMutation(ADD_POST, {
         update(cache, { data: { addPost } }) {
