@@ -7,9 +7,13 @@ const typeDefinitions = `
   type Response {
     success: Boolean
   }
+  type UsersSearch {
+    users: [User]
+  }
   type RootQuery {
     posts: [Post]
     postsFeed(page: Int, limit: Int): PostFeed
+    usersSearch(page: Int, limit: Int, text: String!): UsersSearch
   }
   type PostFeed {
     posts: [Post]

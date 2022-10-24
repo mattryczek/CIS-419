@@ -1,9 +1,11 @@
 import logger from '../../helpers/logger';
+import Sequelize from 'sequelize';
 
 export default function resolver() {
 
   const { db } = this;
   const { Post, User } = db.models;
+  const Op = Sequelize.Op;
 
   const resolvers = {
     Post: {
@@ -12,6 +14,38 @@ export default function resolver() {
       },
     },
     RootQuery: {
+      usersSearch(root, {
+        page,
+        limit,
+        text
+      }, context) {
+        if (text.length < 3) {
+          return {
+            users: []
+          };
+        }
+        var skip = 0;
+        if (page && limit) {
+          skip = page * limit;
+        }
+        var query = {
+          order: [
+            ['createdAt', 'DESC']
+          ],
+          offset: skip,
+        };
+        if (limit) {
+          query.limit = limit;
+        }
+        query.where = {
+          username: {
+            [Op.like]: '%' + text + '%'
+          }
+        };
+        return {
+          users: User.findAll(query)
+        };
+      },
       postsFeed(root, {
         page,
         limit
