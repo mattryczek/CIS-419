@@ -38,14 +38,14 @@ export default function resolver() {
         };
       },
       posts(root, args, context) {
-        return Post.findAll({order: [['createdAt', 'DESC']]});
+        return Post.findAll({ order: [['createdAt', 'DESC']] });
       },
     },
     RootMutation: {
       addPost(root, { post }, context) {
         return User.findAll().then((users) => {
           const usersRow = users[0];
-      
+
           return Post.create({
             ...post,
           }).then((newPost) => {
@@ -58,6 +58,31 @@ export default function resolver() {
               });
               return newPost;
             });
+          });
+        });
+      },
+      deletePost(root, { postId }, context) {
+        return Post.destroy({
+          where: {
+            id: postId
+          }
+        }).then(function (rows) {
+          if (rows === 1) {
+            logger.log({
+              level: 'info',
+              message: 'Post ' + postId + 'was deleted',
+            });
+            return {
+              success: true
+            };
+          }
+          return {
+            success: false
+          };
+        }, function (err) {
+          logger.log({
+            level: 'error',
+            message: err.message,
           });
         });
       },

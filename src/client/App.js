@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Feed from './Feed';
 import '../../assets/css/style.css';
+import './components/fontawesome';
 
 const App = () => {
     return (

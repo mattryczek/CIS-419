@@ -1,8 +1,11 @@
 const typeDefinitions = `
-    type Post {
+  type Post {
     id: Int
     text: String
     user: User
+  }
+  type Response {
+    success: Boolean
   }
   type RootQuery {
     posts: [Post]
@@ -26,6 +29,9 @@ const typeDefinitions = `
     addPost (
       post: PostInput!
     ): Post
+    deletePost (
+      postId: Int!
+    ): Response
   }
   schema {
     query: RootQuery
