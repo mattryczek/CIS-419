@@ -1,6 +1,6 @@
-This update implements support for deleting posts. Some of the codebase was also refactored into React components, for portability.
+This update implements support for the global user object. It currently works on dummy data but will be upgraded once auth is implemented. We also added a way to search for currently registered users.
 
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v4.1...v5.0
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v5.0...v5.1
 
 # Preinstall
 
@@ -22,7 +22,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v5.0 --archive=zip
+gh -R mattryczek/cis-419 release download v5.1 --archive=zip
 ```
 
 to download the release for this assignment.
@@ -32,8 +32,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-5.0.zip
-cd CIS-419-5.0
+unzip CIS-419-5.1.zip
+cd CIS-419-5.1
 npm install && npm run server
 ```
 
@@ -48,4 +48,4 @@ The server will be accessible on the default [`localhost:8000`](https://localhos
 Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal Graphbook demo.
 
 # Usage
-New posts can be typed into the text box and posted with the button. Blank posts are allowed too. You can also delete posts by clicking on the dropdown arrow and pressing "Delete".
+New posts can be typed into the text box and posted with the button. Blank posts are allowed too. You can also delete posts by clicking on the dropdown arrow and pressing "Delete". The currently logged in user should show up in the top left.  A search box in the middle of the navbar allows you to find users.
