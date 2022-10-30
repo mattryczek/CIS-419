@@ -17,6 +17,9 @@ export default function resolver() {
       },
     },
     RootQuery: {
+      currentUser(root, args, context) {
+        return context.user;
+      },
       usersSearch(root, {
         page,
         limit,
@@ -79,6 +82,45 @@ export default function resolver() {
       },
     },
     RootMutation: {
+      signup(root, {
+        email,
+        password,
+        username
+      }, context) {
+        return User.findAll({
+          where: {
+            [Op.or]: [{
+              email
+            }, {
+              username
+            }]
+          },
+          raw: true,
+        }).then(async (users) => {
+          if (users.length) {
+            throw new Error('User already exists');
+          } else {
+            return bcrypt.hash(password, 10).then((hash) => {
+              return User.create({
+                email,
+                password: hash,
+                username,
+                activated: 1,
+              }).then((newUser) => {
+                const token = JWT.sign({
+                  email,
+                  id: newUser.id
+                }, JWT_SECRET, {
+                  expiresIn: '1d'
+                });
+                return {
+                  token
+                };
+              });
+            });
+          }
+        });
+      },
       addPost(root, { post }, context) {
         return User.findAll().then((users) => {
           const usersRow = users[0];

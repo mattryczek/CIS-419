@@ -1,6 +1,6 @@
-This update implements support for logging in. Posts are now hidden behind a login modal until the user provides credentials.
+This update implements support for signing up. Users can be created through the web interface and verified on the backend. The user bar also dynamically shows the currently logged in user, instead of the prefilled static first user as before.
 
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v5.1...v6.0
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v6.0...v6.1
 
 # Preinstall
 
@@ -22,7 +22,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v6.0 --archive=zip
+gh -R mattryczek/cis-419 release download v6.1 --archive=zip
 ```
 
 to download the release for this assignment.
@@ -32,8 +32,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-6.0.zip
-cd CIS-419-6.0
+unzip CIS-419-6.1.zip
+cd CIS-419-6.1
 npm install && npm run server
 ```
 
@@ -51,4 +51,4 @@ Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal
 The main page is now a login screen instead of going directly to the posts. Upon supplying a valid username and password the posts are loaded and the user is able to interact with the web app.
 
 # Video Link
-[Graphbook Login]()
+[Graphbook Signup Form]()
