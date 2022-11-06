@@ -22,7 +22,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v6.1 --archive=zip
+gh -R mattryczek/cis-419 release download v7.0 --archive=zip
 ```
 
 to download the release for this assignment.
@@ -32,8 +32,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-6.1.zip
-cd CIS-419-6.1
+unzip CIS-419-7.0.zip
+cd CIS-419-7.0
 npm install && npm run server
 ```
 
