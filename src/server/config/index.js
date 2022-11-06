@@ -3,6 +3,7 @@ module.exports = {
       "username": "devuser",
       "password": "northwestern",
       "database": "graphbook_dev",
+      "logging": false,
       "host": "10.10.20.39",
       "dialect": "mysql",
       "pool": {
