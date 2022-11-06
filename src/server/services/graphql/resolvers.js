@@ -2,6 +2,27 @@ import logger from '../../helpers/logger';
 import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
 import JWT from 'jsonwebtoken';
+import { GraphQLUpload } from 'graphql-upload';
+
+var Minio = require('minio');
+
+const minio_config = {
+  host: '10.10.20.39',
+  protocol: 'http',
+  api_port: 9000,
+  console_port: 9090,
+  ssl: false,
+  minio_user: 'graphbook',
+  minio_pass: 'northwestern'
+}
+
+var minioClient = new Minio.Client({
+  endPoint: minio_config.host,
+  port: minio_config.api_port,
+  useSSL: minio_config.ssl,
+  accessKey: minio_config.minio_user,
+  secretKey: minio_config.minio_pass
+});
 
 export default function resolver() {
 
@@ -11,6 +32,7 @@ export default function resolver() {
   const { JWT_SECRET } = process.env;
 
   const resolvers = {
+    Upload: GraphQLUpload,
     Post: {
       user(post, args, context) {
         return post.getUser();
@@ -82,6 +104,43 @@ export default function resolver() {
       },
     },
     RootMutation: {
+      async uploadAvatar(root, {
+        file
+      }, context) {
+        const {
+          createReadStream,
+          filename,
+          mimetype,
+          encoding
+        } = await file;
+        const bucket = 'data';
+        const params = {
+          Bucket: bucket,
+          Key: context.user.id + '/' + filename,
+          Body: createReadStream()
+        };
+
+        const response = await minioClient.putObject(
+          params.Bucket,
+          params.Key,
+          params.Body
+          );
+
+          let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;
+
+        return User.update({
+          avatar: location
+        }, {
+          where: {
+            id: context.user.id
+          }
+        }).then(() => {
+          return {
+            filename: filename,
+            url: location
+          }
+        });
+      },
       signup(root, {
         email,
         password,

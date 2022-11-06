@@ -5,6 +5,7 @@ import cors from 'cors';
 import compress from 'compression';
 import servicesLoader from './services';
 import db from './database';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 const utils = {
   db,
@@ -16,7 +17,7 @@ const root = path.join(__dirname, '../../');
 
 const app = express();
 app.use(compress());
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(helmet());
   app.use(helmet.contentSecurityPolicy({
     directives: {
@@ -41,6 +42,7 @@ for (let i = 0; i < serviceNames.length; i += 1) {
   if (name === 'graphql') {
     (async () => {
       await services[name].start();
+      app.use(graphqlUploadExpress());
       services[name].applyMiddleware({ app });
     })();
   } else {

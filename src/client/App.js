@@ -7,6 +7,7 @@ import '../../assets/css/style.css';
 import LoginRegisterForm from './components/loginregister';
 import { useCurrentUserQuery } from './apollo/queries/currentUserQuery';
 import Loading from './components/loading';
+import 'cropperjs/dist/cropper.css';
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('jwt'));
