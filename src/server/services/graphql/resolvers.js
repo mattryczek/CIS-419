@@ -126,6 +126,8 @@ export default function resolver() {
           params.Body
           );
 
+          console.log(response);
+
           let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;
 
         return User.update({
