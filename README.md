@@ -1,10 +1,10 @@
-This update implements support for signing up. Users can be created through the web interface and verified on the backend. The user bar also dynamically shows the currently logged in user, instead of the prefilled static first user as before.
+This update adds support for custom user avatars. In lieu of S3, a local copy of [Minio](https://min.io/) was configured and used instead. Functionality is essentialy identical, albeit with slightly different setup and image loading logic.
 
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v6.0...v6.1
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v6.1...v7.0
 
 # Preinstall
 
-This guide assumes MySQL and phpMyAdmin are installed, running, and accessible. Please also install the `gh` utility if you haven't already:
+This guide assumes Minio, MySQL and phpMyAdmin are installed, running, and accessible. Please also install the `gh` utility if you haven't already:
 
 #### macOS (using Homebrew) 
 `brew install gh`
@@ -37,6 +37,8 @@ cd CIS-419-6.1
 npm install && npm run server
 ```
 
+If you run into security issues, remember to `export` your `JWT_TOKEN` and any other necessary credentials.
+
 In a separate terminal window/tab/session, run
 
 ```
@@ -48,7 +50,7 @@ The server will be accessible on the default [`localhost:8000`](https://localhos
 Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal Graphbook demo.
 
 # Usage
-The main page is now a login screen instead of going directly to the posts. Upon supplying a valid username and password the posts are loaded and the user is able to interact with the web app.
+Login as in the previous releases using and existing user. Clicking on the avatar in the top right bar now opens a file upload/crop dialog. Users can add a picture to use as their new avatar.
 
 # Video Link
-[Graphbook Signup Form]()
+[Image Upload]()
