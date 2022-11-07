@@ -62,6 +62,9 @@ scalar Upload
     uploadAvatar (
       file: Upload!
     ): File @auth
+    uploadVideo (
+      file: Upload!
+    ): File @auth
   }
   schema {
     query: RootQuery

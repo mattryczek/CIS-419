@@ -57,6 +57,7 @@ form [type=submit] {
   padding: 10px;
   border-radius: 5px;
   font-size: 14px;
+  margin-left: 5px;
   float: right;
 }
 
@@ -415,7 +416,6 @@ form [type=submit] {
 .authModal > div form input[type=submit] {
   width: 100px;
   float: right;
-  margin-top: 10px;
 }
 
 .drop {
@@ -446,6 +446,17 @@ button.cancelUpload {
 }
 
 button.uploadAvatar {
+  border: none;
+  background-color: #6ca6fd;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  float: right;
+  margin-top: 10px;
+}
+
+button.uploadVideo {
   border: none;
   background-color: #6ca6fd;
   color: #fff;

@@ -124,11 +124,11 @@ export default function resolver() {
           params.Bucket,
           params.Key,
           params.Body
-          );
+        );
+        
+        console.log(response);
 
-          console.log(response);
-
-          let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;
+        let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;
 
         return User.update({
           avatar: location
@@ -142,6 +142,37 @@ export default function resolver() {
             url: location
           }
         });
+      },
+      async uploadVideo(root, {
+        file
+      }, context) {
+        const {
+          createReadStream,
+          filename,
+          mimetype,
+          encoding
+        } = await file;
+        const bucket = 'data';
+        const params = {
+          Bucket: bucket,
+          Key: context.user.id + '/' + filename,
+          Body: createReadStream()
+        };
+
+        const response = await minioClient.putObject(
+          params.Bucket,
+          params.Key,
+          params.Body
+        );
+
+        console.log(response);
+
+        let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;
+
+        return {
+          filename: filename,
+          url: location
+        };
       },
       signup(root, {
         email,
@@ -210,7 +241,7 @@ export default function resolver() {
           if (rows === 1) {
             logger.log({
               level: 'info',
-              message: 'Post ' + postId + 'was deleted',
+              message: 'Post ' + postId + ' was deleted',
             });
             return {
               success: true

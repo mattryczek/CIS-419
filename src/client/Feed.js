@@ -6,13 +6,15 @@ import Error from './components/error';
 import Post from './components/post';
 import { GET_POSTS } from './apollo/queries/getPosts';
 import { useAddPostMutation } from './apollo/mutations/addPost';
+import AvatarModal from './components/avatarModal';
+import VideoModal from './components/videoModal';
 
 const Feed = () => {
 
     const [postContent, setPostContent] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
-    const { loading, error, data, fetchMore } = useQuery(GET_POSTS, { pollInterval: 5000, variables: { page: 0, limit: 10} });
+    const { loading, error, data, fetchMore } = useQuery(GET_POSTS, { pollInterval: 5000, variables: { page: 0, limit: 10 } });
 
     const [addPost] = useAddPostMutation(postContent);
 
@@ -24,7 +26,7 @@ const Feed = () => {
                 page: page + 1,
             },
             updateQuery(previousResult, { fetchMoreResult }) {
-                if(!fetchMoreResult.postsFeed.posts.length) {
+                if (!fetchMoreResult.postsFeed.posts.length) {
                     setHasMore(false);
                     return previousResult;
                 }
@@ -51,6 +53,16 @@ const Feed = () => {
         setPostContent('');
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const showModal = () => {
+      setIsOpen(!isOpen);
+    }  
+
+    const handleVideo = (event) => {
+        event.preventDefault();
+    };
+
     if (loading) return <Loading />;
     if (error) return <Error><p>{error.message}</p></Error>;
 
@@ -65,6 +77,11 @@ const Feed = () => {
                         setPostContent(e.target.value)}
                         placeholder="Write something..." />
                     <input type="submit" value="Submit" />
+                </form>
+                <br />
+                <form onSubmit={handleVideo}>
+                    <input type="submit" value="Upload Video" onClick={() => showModal()}/>
+                    <VideoModal isOpen={isOpen} showModal={showModal}/>
                 </form>
             </div>
             <div className="feed">
