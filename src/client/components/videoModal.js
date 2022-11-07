@@ -73,7 +73,7 @@ const VideoModal = ({ isOpen, showModal }) => {
         <Modal
             isOpen={isOpen}
             onRequestClose={showModal}
-            contentLabel="Upload Video"
+            contentLabel="Upload File"
             style={modalStyle}
         >
             {!file &&
@@ -83,7 +83,7 @@ const VideoModal = ({ isOpen, showModal }) => {
                 </div>)
             }
             {file && (
-                <button className="cancelUpload" onClick={changeVideo}>Change video</button>
+                <button className="cancelUpload" onClick={changeVideo}>Change file</button>
             )}
             <button className="uploadVideo" onClick={saveVideo}>Save</button>
         </Modal>

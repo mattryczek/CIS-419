@@ -80,7 +80,7 @@ const Feed = () => {
                 </form>
                 <br />
                 <form onSubmit={handleVideo}>
-                    <input type="submit" value="Upload Video" onClick={() => showModal()}/>
+                    <input type="submit" value="Upload File" onClick={() => showModal()}/>
                     <VideoModal isOpen={isOpen} showModal={showModal}/>
                 </form>
             </div>

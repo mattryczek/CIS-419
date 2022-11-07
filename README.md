@@ -1,6 +1,6 @@
-This update adds support for custom user avatars. In lieu of S3, a local copy of [Minio](https://min.io/) was configured and used instead. Functionality is essentialy identical, albeit with slightly different setup and image loading logic.
+This update adds support for arbitrary file uploads. After logging in users will be able to see the upload file button. Clicking this brings up a modal similar to the avatar update one. Files can be dragged and dropped or chosen with the system file picker. Currently the files are not used or shown, but successfully upload and are stored in the Minio bucket.
 
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v6.1...v7.0
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v7.0...v7.1
 
 # Preinstall
 
@@ -22,7 +22,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v7.0 --archive=zip
+gh -R mattryczek/cis-419 release download v7.1 --archive=zip
 ```
 
 to download the release for this assignment.
@@ -32,8 +32,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-7.0.zip
-cd CIS-419-7.0
+unzip CIS-419-7.1.zip
+cd CIS-419-7.1
 npm install && npm run server
 ```
 
@@ -50,7 +50,7 @@ The server will be accessible on the default [`localhost:8000`](https://localhos
 Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal Graphbook demo.
 
 # Usage
-Login as in the previous releases using and existing user. Clicking on the avatar in the top right bar now opens a file upload/crop dialog. Users can add a picture to use as their new avatar.
+Login as in the previous releases using and existing user. Clicking on the "Upload File" button and upload a file. Status can be verified by checking server logs for an eTag from Minio.
 
 # Video Link
 [Image Upload]()
