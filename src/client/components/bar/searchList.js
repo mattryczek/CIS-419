@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchList = ({ data: { usersSearch: { users } } }) => {
     const [show, setShowList] = useState(false);
@@ -32,12 +33,16 @@ const SearchList = ({ data: { usersSearch: { users } } }) => {
 
     return (
         show &&
+
         <div className="result">
             {users.map((user, i) =>
-                <div key={user.id} className="user">
-                    <img src={user.avatar} />
-                    <span>{user.username}</span>
-                </div>
+                <Link to={'/user/' + user.username}>
+                    <div key={user.id} className="user">
+                        <img src={user.avatar} />
+                        <span>{user.username}</span>
+                    </div>
+                </Link>
+
             )}
         </div>
     )
