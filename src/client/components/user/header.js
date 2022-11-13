@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AvatarModal from '../avatarModal';
 
 export const UserProfileHeader = ({user}) => {
   const { avatar, username } = user;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const showModal = () => {
+    setIsOpen(!isOpen);
+  }
+
+  if(!user) return null;
 
   return (
     <div className="profileHeader">
       <div className="avatar">
-        <img src={avatar}/>
+        <img src={avatar} onClick={() => showModal()}/>
       </div>
+      <AvatarModal isOpen={isOpen} showModal={showModal}/>
       <div className="information">
         <p>{username}</p>
-        <p>You can provide further information here and build your really personal header component for your users.</p>
+        <p>Write an interesting bio...</p>
       </div>
     </div>
   )
