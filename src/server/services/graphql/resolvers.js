@@ -39,6 +39,13 @@ export default function resolver() {
       },
     },
     RootQuery: {
+      user(root, { username }, context) {
+        return User.findOne({
+          where: {
+            username: username
+          }
+        });
+      },
       currentUser(root, args, context) {
         return context.user;
       },
@@ -74,10 +81,7 @@ export default function resolver() {
           users: User.findAll(query)
         };
       },
-      postsFeed(root, {
-        page,
-        limit
-      }, context) {
+      postsFeed(root, { page, limit, username }, context) {
         var skip = 0;
 
         if (page && limit) {
@@ -93,6 +97,11 @@ export default function resolver() {
 
         if (limit) {
           query.limit = limit;
+        }
+
+        if(username) {
+          query.include = [{model: User}];
+          query.where = { '$User.username$': username };
         }
 
         return {
@@ -125,7 +134,7 @@ export default function resolver() {
           params.Key,
           params.Body
         );
-        
+
         console.log(response);
 
         let location = minio_config.protocol + '://' + minio_config.host + ':' + minio_config.api_port + '/' + bucket + '/' + params.Key;

@@ -1,16 +1,20 @@
 import React from 'react';
-import { UserConsumer } from '../context/user';
 import SearchBar from './search';
 import UserBar from './user';
+import { UserConsumer } from '../context/user';
+import Home from './home';
 
-const Bar = () => {
+const Bar = ({ changeLoginState }) => {
   return (
     <div className="topbar">
       <div className="inner">
-        <SearchBar />
+        <SearchBar/>
         <UserConsumer>
           <UserBar />
         </UserConsumer>
+      </div>
+      <div className="buttons">
+        <Home/>
       </div>
     </div>
   );

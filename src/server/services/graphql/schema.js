@@ -20,8 +20,9 @@ scalar Upload
     users: [User]
   }
   type RootQuery {
+    user(username: String!): User @auth
     posts: [Post]
-    postsFeed(page: Int, limit: Int): PostFeed @auth
+    postsFeed(page: Int, limit: Int, username: String): PostFeed @auth
     usersSearch(page: Int, limit: Int, text: String!): UsersSearch
     currentUser: User @auth
   }
