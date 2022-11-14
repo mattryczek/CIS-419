@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import AvatarModal from '../avatarModal';
+import { GET_CURRENT_USER } from '../../apollo/queries/currentUserQuery';
+import { useQuery } from '@apollo/client';
 
 export const UserProfileHeader = ({user}) => {
-  const { avatar, username, email } = user;
+  const { avatar, username, email, id } = user;
   const [isOpen, setIsOpen] = useState(false);
 
   const showModal = () => {
@@ -11,6 +13,11 @@ export const UserProfileHeader = ({user}) => {
 
   let mail_to = () => {return "mailto:" + new String(email)}
 
+  const { loading, error, data } = useQuery(GET_CURRENT_USER);
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
   if(!user) return null;
 
   return (
@@ -18,10 +25,10 @@ export const UserProfileHeader = ({user}) => {
       <div className="avatar">
         <img src={avatar} onClick={() => showModal()}/>
       </div>
-      <AvatarModal isOpen={isOpen} showModal={showModal}/>
+      {(data.currentUser.id === id) ? <AvatarModal isOpen={isOpen} showModal={showModal}/> : <></>} 
       <div className="information">
         <p>{username}</p>
-        <p>Contact me: <a href={mail_to()}>{email}</a></p>
+        <address>Contact me: <a href={mail_to()}>{email}</a></address>
         <p>Write an interesting bio...</p>
       </div>
     </div>
