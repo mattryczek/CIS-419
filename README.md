@@ -1,6 +1,7 @@
-This update adds support for arbitrary file uploads. After logging in users will be able to see the upload file button. Clicking this brings up a modal similar to the avatar update one. Files can be dragged and dropped or chosen with the system file picker. Currently the files are not used or shown, but successfully upload and are stored in the Minio bucket.
+This is probably the biggest release yet. First and foremost I created a hotfix to amend post ID mismatch -- no matter the logged in user posts were showing as coming from the first user created. Oops! Correct functionality has been restored. Additionally, I implemented a profile page, and added QOL improvements to the UI. Additionally, users can edit their own avatar, username and email from the profile page now.
 
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v7.0...v7.1
+
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v7.1...v8
 
 # Preinstall
 
@@ -22,7 +23,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v7.1 --archive=zip
+gh -R mattryczek/cis-419 release download v8 --archive=zip
 ```
 
 to download the release for this assignment.
@@ -32,8 +33,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-7.1.zip
-cd CIS-419-7.1
+unzip CIS-419-8.zip
+cd CIS-419-8
 npm install && npm run server
 ```
 
@@ -53,4 +54,4 @@ Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal
 Login as in the previous releases using and existing user. Clicking on the "Upload File" button and upload a file. Status can be verified by checking server logs for an eTag from Minio.
 
 # Video Link
-[Image Upload]()
+[Profile Page Support & Advanced Routing]()
