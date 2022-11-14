@@ -11,6 +11,7 @@ export const UserProfileHeader = ({ user }) => {
   const { avatar, username, email, id } = user;
   const [isOpen, setIsOpen] = useState(false);
   const [changeUsername] = useChangeUsernameMutation();
+  const [changeEmail] = useChangeEmailMutation();
 
   const showModal = () => {
     setIsOpen(!isOpen);
@@ -41,16 +42,16 @@ export const UserProfileHeader = ({ user }) => {
             <FontAwesomeIcon icon={faEnvelopeCircleCheck} id="mail_me" />
           </a>
         }
-        
+
         {/* Username Ternary */}
         {(data.currentUser.id === id) ?
-          <input id='username_edit' type='text' defaultValue={username} onBlur={(e) => { changeUsername({ variables: { username: e.target.value } }) }}></input> :
+          <input id='username_edit' type='text' defaultValue={username} onBlur={(e) => { changeUsername({ variables: { username: e.target.value } }); window.location.href = '/user/' + e.target.value; }}></input> :
           <p id='username_noedit'>{username}</p>
         }
 
         {/* Email Ternary */}
         {(data.currentUser.id === id) ?
-          <input id='email_edit' type='email' defaultValue={email} onBlur={(e) => { changeEmail({ variables: { email: e.target.value } }) }}></input> :
+          <input id='email_edit' type='email' defaultValue={email} onBlur={(e) => { changeEmail({ variables: { email: e.target.value } })}}></input> :
           <address>{email}</address>
         }
 
