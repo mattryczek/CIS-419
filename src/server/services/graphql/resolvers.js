@@ -254,22 +254,18 @@ export default function resolver() {
           }
         });
       },
-      addPost(root, { post }, context) {
-        return User.findAll().then((users) => {
-          const usersRow = users[0];
-
-          return Post.create({
-            ...post,
-          }).then((newPost) => {
-            return Promise.all([
-              newPost.setUser(usersRow.id),
-            ]).then(() => {
-              logger.log({
-                level: 'info',
-                message: 'Posted text [' + newPost.text + ']',
-              });
-              return newPost;
+      addPost(root, { post }, context) {        
+        return Post.create({
+          ...post,
+        }).then((newPost) => {
+          return Promise.all([
+            newPost.setUser(context.user.id),
+          ]).then(() => {
+            logger.log({
+              level: 'info',
+              message: 'Posted text [' + newPost.text + ']',
             });
+            return newPost;
           });
         });
       },
