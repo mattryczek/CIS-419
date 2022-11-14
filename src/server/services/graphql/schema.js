@@ -54,10 +54,10 @@ scalar Upload
     ): Response
     changeUsername (
       username: String!
-    ): Response
+    ): Response @auth
     changeEmail (
       email: String!
-    ): Response
+    ): Response @auth
     login (
       email: String!
       password: String!

@@ -113,11 +113,25 @@ export default function resolver() {
       },
     },
     RootMutation: {
+      changeEmail(root, {
+        email
+      }, context) {
+
+        return User.update({
+          email: email
+        }, {
+          where: {
+            id: context.user.id
+          }
+        }).then(() => {
+          return {
+            success: true
+          }
+        });
+      },
       changeUsername(root, {
         username
       }, context) {
-
-        console.log(context.user.id);
 
         return User.update({
           username: username

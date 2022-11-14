@@ -505,19 +505,36 @@ button.uploadVideo {
 }
 
 /* https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph */
-.information input:first-of-type {
+#username_edit {
   font-size: 24px;
   font-weight: bold;
   border: none;
-  display: inline;
+  display: flex;
   font-family: inherit;
   padding: none;
   width: auto;
   background-color: inherit;
 }
 
-.information p:first-child {
+#email_edit {
+  font-size: 16px;
+  border: none;
+  display: flex;
+  font-family: inherit;
+  padding: none;
+  width: 59%;
+  background-color: inherit;
+}
+
+#username_noedit {
+  display: inline;
   font-size: 24px;
   font-weight: bold;
-  text-decoration: underline;
+}
+
+#mail_me {
+  font-size: 20px;
+  display: inline;
+  margin-right: 1%;
+  color: #000;
 }

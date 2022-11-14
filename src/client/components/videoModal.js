@@ -39,7 +39,6 @@ const VideoModal = ({ isOpen, showModal }) => {
 
     const saveVideo = () => {
         const resultFile = dataURItoBlob(result);
-        console.log(resultFile);
         resultFile.name = file.filename;
         uploadVideo({ variables: { file: resultFile } }).then(() => {
             showModal();
