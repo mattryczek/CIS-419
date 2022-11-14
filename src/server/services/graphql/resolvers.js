@@ -254,16 +254,16 @@ export default function resolver() {
           }
         });
       },
-      addPost(root, { post }, context) {        
+      addPost(root, { post }, context) {   
         return Post.create({
           ...post,
-        }).then((newPost) => {
+        }).then((newPost) => {   
           return Promise.all([
             newPost.setUser(context.user.id),
           ]).then(() => {
             logger.log({
               level: 'info',
-              message: 'Posted text [' + newPost.text + ']',
+              message: context.user.username + 'posted text [' + newPost.text + ']',
             });
             return newPost;
           });

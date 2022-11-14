@@ -11,7 +11,7 @@ export const CHANGE_EMAIL = gql`
 
 export const getChangeEmailConfig = () => ({
     update(cache, { data: { changeEmail } }) {
-      console.log(changeEmail);
+      console.log(changeEmail.success);
       if(changeEmail) {
         cache.modify({
           fields: {

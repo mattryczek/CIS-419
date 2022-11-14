@@ -11,7 +11,7 @@ export const CHANGE_USERNAME = gql`
 
 export const getChangeUsernameConfig = () => ({
     update(cache, { data: { changeUsername } }) {
-      console.log(changeUsername);
+      console.log(changeUsername.success);
       if(changeUsername) {
         cache.modify({
           fields: {
