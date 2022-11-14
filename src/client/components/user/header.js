@@ -29,7 +29,7 @@ export const UserProfileHeader = ({user}) => {
       <div className="information">
         <p>{username}</p>
         <address>Contact me: <a href={mail_to()}>{email}</a></address>
-        <p>Write an interesting bio...</p>
+        <p>This user is quite mysterious indeed...</p>
       </div>
     </div>
   )
