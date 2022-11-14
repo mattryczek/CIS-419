@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import AvatarModal from '../avatarModal';
 
 export const UserProfileHeader = ({user}) => {
-  const { avatar, username } = user;
+  const { avatar, username, email } = user;
   const [isOpen, setIsOpen] = useState(false);
 
   const showModal = () => {
     setIsOpen(!isOpen);
   }
+
+  let mail_to = () => {return "mailto:" + new String(email)}
 
   if(!user) return null;
 
@@ -19,7 +21,7 @@ export const UserProfileHeader = ({user}) => {
       <AvatarModal isOpen={isOpen} showModal={showModal}/>
       <div className="information">
         <p>{username}</p>
-        <p>{user.email}</p>
+        <p>Contact me: <a href={mail_to()}>{email}</a></p>
         <p>Write an interesting bio...</p>
       </div>
     </div>

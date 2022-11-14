@@ -13,8 +13,6 @@ const UserProfile = ({ username }) => {
   if (loading || userLoading) return <Loading />;
   if (error) return <Error><p>{error.message}</p></Error>;
 
-  console.log(user.user);
-
   return (
     <div className="user">
       <div className="inner">
