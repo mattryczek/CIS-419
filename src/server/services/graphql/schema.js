@@ -33,6 +33,7 @@ scalar Upload
     id: Int
     avatar: String
     username: String
+    email: String
   }
   type Auth {
     token: String

@@ -19,6 +19,7 @@ export const UserProfileHeader = ({user}) => {
       <AvatarModal isOpen={isOpen} showModal={showModal}/>
       <div className="information">
         <p>{username}</p>
+        <p>{user.email}</p>
         <p>Write an interesting bio...</p>
       </div>
     </div>

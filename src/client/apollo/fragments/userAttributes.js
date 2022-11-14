@@ -5,5 +5,6 @@ export const USER_ATTRIBUTES = gql`
     id
     username
     avatar
+    email
   }
 `;
