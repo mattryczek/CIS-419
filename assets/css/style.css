@@ -504,7 +504,7 @@ button.uploadVideo {
   margin-top: 10px;
 }
 
-.information :first-child {
+.information p:first-of-type {
   font-size: 24px;
   font-weight: bold;
   text-decoration: underline;
