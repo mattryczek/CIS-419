@@ -9,28 +9,26 @@ export const CHANGE_USERNAME = gql`
   }
 `;
 
-// export const getChangeUsernameConfig = () => ({
-//     update(cache, { data: { changeUsername } }) {
-//       console.log(changeUsername);
-//       if(changeUsername) {
-//         cache.modify({
-//           fields: {
-//             currentUser(user, { readField }) {
-//               cache.modify({
-//                 id: user,
-//                 fields: {
-//                   username() {
-//                     return changeUsername;
-//                   }
-//                 }
-//               })
-//             }
-//           }
-//         });
-//       }
-//     }
-//   });
-
-// , getChangeUsernameConfig()
+export const getChangeUsernameConfig = () => ({
+    update(cache, { data: { changeUsername } }) {
+      console.log(changeUsername);
+      if(changeUsername) {
+        cache.modify({
+          fields: {
+            currentUser(user, { readField }) {
+              cache.modify({
+                id: user,
+                fields: {
+                  username() {
+                    return changeUsername;
+                  }
+                }
+              })
+            }
+          }
+        });
+      }
+    }
+  });
   
-  export const useChangeUsernameMutation = () => useMutation(CHANGE_USERNAME);
+  export const useChangeUsernameMutation = () => useMutation(CHANGE_USERNAME, getChangeUsernameConfig());
