@@ -113,6 +113,24 @@ export default function resolver() {
       },
     },
     RootMutation: {
+      changeUsername(root, {
+        username
+      }, context) {
+
+        console.log(context.user.id);
+
+        return User.update({
+          username: username
+        }, {
+          where: {
+            id: context.user.id
+          }
+        }).then(() => {
+          return {
+            success: true
+          }
+        });
+      },
       async uploadAvatar(root, {
         file
       }, context) {

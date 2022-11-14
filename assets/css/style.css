@@ -504,7 +504,19 @@ button.uploadVideo {
   margin-top: 10px;
 }
 
-.information p:first-of-type {
+/* https://stackoverflow.com/questions/38830620/make-an-input-look-like-normal-text-in-a-paragraph */
+.information input:first-of-type {
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  display: inline;
+  font-family: inherit;
+  padding: none;
+  width: auto;
+  background-color: inherit;
+}
+
+.information p:first-child {
   font-size: 24px;
   font-weight: bold;
   text-decoration: underline;

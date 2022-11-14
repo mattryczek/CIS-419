@@ -52,6 +52,12 @@ scalar Upload
     deletePost (
       postId: Int!
     ): Response
+    changeUsername (
+      username: String!
+    ): Response
+    changeEmail (
+      email: String!
+    ): Response
     login (
       email: String!
       password: String!
