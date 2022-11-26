@@ -1,7 +1,6 @@
-This is probably the biggest release yet. First and foremost I created a hotfix to amend post ID mismatch -- no matter the logged in user posts were showing as coming from the first user created. Oops! Correct functionality has been restored. Additionally, I implemented a profile page, and added QOL improvements to the UI. Additionally, users can edit their own avatar, username and email from the profile page now.
+This release implements SSR rendering. It is a basic implementation and the only path the server can render for now is the public paths, which is just the login page. Auth + SSR coming soon to a release near you.
 
-
-**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v7.1...v8
+**Full Changelog**: https://github.com/mattryczek/CIS-419/compare/v8...v9.0
 
 # Preinstall
 
@@ -33,8 +32,8 @@ to download the release for this assignment.
 `cd` wherever you downloaded the `.zip` of the latest release then
 
 ```
-unzip CIS-419-8.zip
-cd CIS-419-8
+unzip CIS-419-9.0.zip
+cd CIS-419-9.0
 npm install && npm run server
 ```
 
@@ -51,7 +50,7 @@ The server will be accessible on the default [`localhost:8000`](https://localhos
 Browse to [`localhost:3000/`](http://localhost:3000) to view the now functinonal Graphbook demo.
 
 # Usage
-Login as in the previous releases using and existing user. Clicking on the "Upload File" button and upload a file. Status can be verified by checking server logs for an eTag from Minio.
+Instead of running the client it suffices to only run the server. Browse to [`localhost:8000`](https://localhost:8000) and verify only the HTML of `template.js` is being emitted and rendered.
 
 # Video Link
-[Profile Page Support & Advanced Routing]()
+[SSR]()
