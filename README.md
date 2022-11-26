@@ -22,7 +22,7 @@ and it will take you through the login steps via browser.
 Once `gh` is installed simply run
 
 ```
-gh -R mattryczek/cis-419 release download v8 --archive=zip
+gh -R mattryczek/cis-419 release download v9.0 --archive=zip
 ```
 
 to download the release for this assignment.
